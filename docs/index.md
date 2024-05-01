@@ -63,8 +63,15 @@ Integrate the API endpoint into your service to call the Qwen-VL model as part o
 
 The Qwen-VL model transitioned to using ModelStudio API. We currently use <a href="https://dashscope.aliyun.com/"> Dashscope </a> API; <a href="https://help.aliyun.com/zh/dashscope/support/faq?disableWebsiteRedirect=true">see here for how to access it</a>.
 
+## Step 8: Set Image URL
 
-## Step 8: Network and WebUI Configuration
+Before proceeding, ensure that you have a valid image URL that you wish to download and use. A valid image URL should:
+
+- Start with http:// or https://.
+- End with an image file extension such as .png, .jpg, .jpeg, or .bmp.
+To confirm the URL's validity, you can test it in a web browser. The image should be displayed directly in the browser if the URL is correct. After it, feel free to put the picture URL to the ImageURL field.
+
+## Step 9: Network and WebUI Configuration
 
 1. Assign a username for web UI access, with "admin" as the default option.
 2. Create a strong password for enhanced security.
@@ -74,7 +81,7 @@ The Qwen-VL model transitioned to using ModelStudio API. We currently use <a hre
 4. Proceed by clicking "Next: Confirm Order."
 ![Network Configuration](image-7.png)
 
-## Step 9: Deploying Your GenAI Assistant Service
+## Step 10: Deploying Your GenAI Assistant Service
 
 Please review all settings, agree to the "Terms of Service," and deploy your service by selecting "Create Now." Please be patient as the service initiates.
 ![Launch Service](image-8.png)
