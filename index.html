@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="计算巢是阿里云开放给企业应用服务商的服务管理平台。服务商能够在计算巢上发布私有化部署服务，为其客户提供云上软件一键部署的能力；同时也支持全托管模式的服务，赋能服务商托管其客户资源。">
+  <title>Step-by-Step Guide for Setting Up a GenAI-Multimodal-LLM on Compute Nest - Aliyun 计算巢 x Demo</title>
+
+  <link rel="shortcut icon" href="img/favicon.ico">
+
+  <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css">
+  <link rel="stylesheet" href="css/theme.css">
+  
+
+  
+
+  
+  
+
+  
+    <script src="search/main.js"></script>
+  
+
+  
+
+  <script src="js/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</head>
+
+<body>
+  <div class="container">
+    <div class="nav">
+      <div class="nav-inner">
+        <div class="logo">
+          <img src="./img/logo-2x.png">
+        </div>
+        <div class="nav-list">
+          <ul>
+          
+              <li><a href="#step-by-step-guide-for-setting-up-a-genai-multimodal-llm-on-compute-nest">Step-by-Step Guide for Setting Up a GenAI-Multimodal-LLM on Compute Nest</a></li>
+              
+                  <li><a href="#introduction">Introduction</a></li>
+                  
+              
+                  <li><a href="#prerequisites">Prerequisites</a></li>
+                  
+              
+                  <li><a href="#step-1-alibaba-cloud-account-preparation">Step 1: Alibaba Cloud Account Preparation</a></li>
+                  
+              
+                  <li><a href="#step-2-starting-with-compute-nest">Step 2: Starting with Compute Nest</a></li>
+                  
+              
+                  <li><a href="#step-3-configuring-your-service-instance">Step 3: Configuring Your Service Instance</a></li>
+                  
+              
+                  <li><a href="#step-4-launching-a-pai-eas-service-with-llm">Step 4: Launching a PAI-EAS Service with LLM</a></li>
+                  
+              
+                  <li><a href="#step-5-establishing-analyticdb-for-postgresql">Step 5: Establishing AnalyticDB for PostgreSQL</a></li>
+                  
+              
+                  <li><a href="#step-6-initialization-of-intelligent-speech-interaction">Step 6: Initialization of Intelligent Speech Interaction</a></li>
+                  
+              
+                  <li><a href="#step-7-incorporating-modelstudio-or-dashscope-api">Step 7: Incorporating Modelstudio or Dashscope API</a></li>
+                  
+              
+                  <li><a href="#step-8-set-image-url">Step 8: Set Image URL</a></li>
+                  
+              
+                  <li><a href="#step-9-network-and-webui-configuration">Step 9: Network and WebUI Configuration</a></li>
+                  
+              
+                  <li><a href="#step-10-deploying-your-genai-assistant-service">Step 10: Deploying Your GenAI Assistant Service</a></li>
+                  
+              
+                  <li><a href="#utilizing-the-genai-assistant-service">Utilizing the GenAI Assistant Service</a></li>
+                  
+                      <li class="li-h3"><a href="#uploading-documents">Uploading Documents</a></li>
+                  
+                      <li class="li-h3"><a href="#asking-questions">Asking Questions</a></li>
+                  
+                      <li class="li-h3"><a href="#uploading-images">Uploading Images</a></li>
+                  
+                      <li class="li-h3"><a href="#uploading-audio-files">Uploading Audio Files</a></li>
+                  
+                      <li class="li-h3"><a href="#tips-for-smooth-operation">Tips for Smooth Operation</a></li>
+                  
+              
+                  <li><a href="#additional-resources">Additional Resources</a></li>
+                  
+              
+          
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="content theme-github">
+      
+      <div class="content-inner">        
+        
+        <h1 id="step-by-step-guide-for-setting-up-a-genai-multimodal-llm-on-compute-nest">Step-by-Step Guide for Setting Up a GenAI-Multimodal-LLM on Compute Nest</h1>
+<p><img alt="Architecture" src="image-0.png" /></p>
+<h2 id="introduction">Introduction</h2>
+<p>This tutorial aims to guide you through the establishment of a Multimodal Smart GenAI Assistant Service, leveraging the Qwen LLM and Qwen-VL others on the Compute Nest platform, and integrating Alibaba Cloud's Platform for AI—Elastic Algorithm Service (PAI-EAS), AnalyticDB for PostgreSQL, Intelligent Speech interaction, and ECS for webui.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<ul>
+<li>Active Alibaba Cloud account</li>
+<li>Familiarity with AI models and cloud services</li>
+</ul>
+<h2 id="step-1-alibaba-cloud-account-preparation">Step 1: Alibaba Cloud Account Preparation</h2>
+<p>If you haven't already, ensure your registration on Alibaba Cloud by signing up <a href="https://www.alibabacloud.com/">here</a>.</p>
+<h2 id="step-2-starting-with-compute-nest">Step 2: Starting with Compute Nest</h2>
+<ol>
+<li>Log into your Alibaba Cloud account.</li>
+<li>Navigate to Compute Nest and search for "Multimodal Smart GenAI Assistant Service" or the GenAI-Multimodal-LLM. Click "Official Use" to proceed.
+<img alt="Select Official Use" src="image-1.png" /></li>
+</ol>
+<h2 id="step-3-configuring-your-service-instance">Step 3: Configuring Your Service Instance</h2>
+<p>You need to: </p>
+<ol>
+<li>Assign a name to your service instance.</li>
+<li>Select the ECS (Elastic Computing Services) settings, opting for an ecs.c6.2xlarge for better performance.</li>
+<li>Establish a secure password for accessing the instance.
+<img alt="Initialize Instance" src="image-2.png" /></li>
+</ol>
+<h2 id="step-4-launching-a-pai-eas-service-with-llm">Step 4: Launching a PAI-EAS Service with LLM</h2>
+<p>To deploy your LLM on PAI-EAS:</p>
+<ol>
+<li>choose an LLM model that fits your requirements from the available options.</li>
+<li>Select the instance type suitable for your needs.</li>
+<li>Deploy your model on PAI-EAS, ensuring you save the API endpoint information for future reference.
+<img alt="Deploy PAI-EAS Service" src="image-3.png" /></li>
+</ol>
+<h2 id="step-5-establishing-analyticdb-for-postgresql">Step 5: Establishing AnalyticDB for PostgreSQL</h2>
+<p>Configure your vector storage by:</p>
+<ol>
+<li>Selecting an instance specification for AnalyticDB for PostgreSQL based on the anticipated document load.</li>
+<li>Defining the size of the document storage.</li>
+<li>Setting "kbsuser" as the default DB username (or choosing another). Avoid using symbols like "@" in passwords.
+<img alt="Configure AnalyticDB" src="image-4.png" /></li>
+</ol>
+<h2 id="step-6-initialization-of-intelligent-speech-interaction">Step 6: Initialization of Intelligent Speech Interaction</h2>
+<p>Navigate to the Intelligent Speech Interaction service within your Alibaba Cloud console.
+Add a configuration by entering your Alibaba Cloud account:
+- AccessKey pair: AccessKey and SecretKey.  <a href="https://www.alibabacloud.com/help/en/ram/user-guide/create-an-accesskey-pair">How to get an AccessKey pair</a>
+- API token. The Automatic Speech Recognition (ASR) or Speech-To-Text (STT) solution uses <a href= "https://www.alibabacloud.com/en/product/intelligent-speech-interaction">Intelligent Speech Interaction</a>. To use it, you need to create a project ( <a href= "https://www.alibabacloud.com/help/en/isi/create-a-project#2572188">details here</a>) and obtain the project's appkey (<a href= "https://www.alibabacloud.com/help/en/isi/getting-started/obtain-an-access-token#topic-2572193">details here</a>).</p>
+<p><img alt="API-Keys" src="image-6.png" /></p>
+<h2 id="step-7-incorporating-modelstudio-or-dashscope-api">Step 7: Incorporating Modelstudio or Dashscope API</h2>
+<p>Obtain the Model Studio or Dashscope API endpoint for the Qwen-VL model from the Alibaba Cloud console.
+Integrate the API endpoint into your service to call the Qwen-VL model as part of your assistant's capabilities. </p>
+<p>The Qwen-VL model transitioned to using ModelStudio API. We currently use <a href="https://dashscope.aliyun.com/"> Dashscope </a> API; <a href="https://help.aliyun.com/zh/dashscope/support/faq?disableWebsiteRedirect=true">see here for how to access it</a>.</p>
+<h2 id="step-8-set-image-url">Step 8: Set Image URL</h2>
+<p>Before proceeding, ensure that you have a valid image URL that you wish to download and use. A valid image URL should:</p>
+<ul>
+<li>Start with http:// or https://.</li>
+<li>End with an image file extension such as .png, .jpg, .jpeg, or .bmp.
+To confirm the URL's validity, you can test it in a web browser. The image should be displayed directly in the browser if the URL is correct. After it, feel free to put the picture URL to the ImageURL field.</li>
+</ul>
+<h2 id="step-9-network-and-webui-configuration">Step 9: Network and WebUI Configuration</h2>
+<ol>
+<li>Assign a username for web UI access, with "admin" as the default option.</li>
+<li>
+<p>Create a strong password for enhanced security.
+<img alt="Assign a username for web UI access" src="image-5.png" /></p>
+</li>
+<li>
+<p>For VPC configuration, either select an existing VPC or furnish new VPC details if required.</p>
+</li>
+<li>Proceed by clicking "Next: Confirm Order."
+<img alt="Network Configuration" src="image-7.png" /></li>
+</ol>
+<h2 id="step-10-deploying-your-genai-assistant-service">Step 10: Deploying Your GenAI Assistant Service</h2>
+<p>Please review all settings, agree to the "Terms of Service," and deploy your service by selecting "Create Now." Please be patient as the service initiates.
+<img alt="Launch Service" src="image-8.png" /></p>
+<h2 id="utilizing-the-genai-assistant-service">Utilizing the GenAI Assistant Service</h2>
+<p>Web UI is tailored to help you upload and manage various document types, images, and audio files and easily extract insights and answers from your content through an interactive AI assistant. Follow this guide to navigate our Web UI and make the most out of your experience.</p>
+<p><img alt="Web UI" src="image-10.png" /></p>
+<h3 id="uploading-documents">Uploading Documents</h3>
+<p>Our platform supports various document types as a knowledge base, including DOCX, PDF, XLSX, and TXT. Here's how to upload documents and get started:</p>
+<ol>
+<li>
+<p><strong>Locate the Upload Section:</strong> Below the introduction, on the left side of the web UI, you should find an upload interface: "Upload Document" designated explicitly for documents.
+<img alt="Upload File Panel" src="image-11.png" /></p>
+</li>
+<li>
+<p><strong>Select Your File:</strong> Click on the "Click to Upload" button or drag and drop your document directly into the highlighted area.</p>
+</li>
+<li><strong>Wait for Completion:</strong> The system will now upload the document. A progress bar or an icon will indicate the upload status. Wait until the document is completely uploaded.</li>
+<li><strong>Confirmation:</strong> Once uploaded, a confirmation message may appear, or the file may be listed in your knowledge base.
+<img alt="Upload Success" src="image-12.png" /></li>
+</ol>
+<h3 id="asking-questions">Asking Questions</h3>
+<p>After uploading the document, you can interact with the GenAI Smart Assistant:</p>
+<ol>
+<li><strong>Navigate to the assistant:</strong> Find the input field or section where you can enter your questions.</li>
+<li><strong>Type Your Question:</strong> Enter any question related to the uploaded document. For example, "What is the main topic of the third chapter in the uploaded text?"</li>
+<li><strong>Submit:</strong> Press the"&gt;" button or hit Enter to submit your question.</li>
+<li><strong>View the Answer:</strong> The assistant will process your question and provide an answer, usually displayed below the input box.
+<img alt="Conversation with GenAI" src="image-13.png" /></li>
+</ol>
+<h3 id="uploading-images">Uploading Images</h3>
+<p>You can talk with image by attaching a picture and ask questions about them:</p>
+<ol>
+<li>
+<p><strong>Find the Image Upload:</strong> Locate the section for text input and find button "+".
+<img alt="Talk with Image" src="image-14.png" /></p>
+</li>
+<li>
+<p><strong>Upload Your Image:</strong> Click on the "+" button and attach your image to the text (the question related data on the image). Acceptable formats typically include JPEG, PNG, and others.
+<img alt="Uploaded Image" src="image-15.png" /></p>
+</li>
+<li><strong>Ask Questions:</strong> Once your image is uploaded, use the assistant's input field to ask questions about its content or context. Press the"&gt;" button or hit Enter to submit it.</li>
+</ol>
+<p><img alt="Result" src="image-16.png" />
+<img alt="Result" src="image-17.png" /></p>
+<h3 id="uploading-audio-files">Uploading Audio Files</h3>
+<p>Our platform allows you to upload audio files and inquire about the contained knowledge:</p>
+<ol>
+<li><strong>Audio Upload Section:</strong> Locate the section for text input and find button "+".
+<img alt="Audio Talk" src="image-14.png" /></li>
+<li><strong>Select and Upload Audio:</strong> Choose your audio file by clicking "Choose File." Supported formats include MP3, WAV, and more.</li>
+<li><strong>Ask Related Questions:</strong> After uploading your audio file, press the"&gt;" button or hit Enter to submit it.</li>
+</ol>
+<h3 id="tips-for-smooth-operation">Tips for Smooth Operation</h3>
+<ul>
+<li>Ensure your files are in the correct format and within the size limits specified by the platform.</li>
+<li>If the upload fails, check your internet connection and confirm whether the file meets the platform's requirements.</li>
+<li>When asking questions, be as clear and specific as possible to help the AI provide more accurate answers.</li>
+<li>If the answer isn't what you were looking for, refine your question or provide more context.</li>
+</ul>
+<p>Remember, this is a powerful tool that leverages cutting-edge artificial intelligence to assist you. As such, the quality of the outputs heavily depends on the inputs you provide. Happy querying!</p>
+<ul>
+<li><strong>General Query Handling:</strong> Users can input inquiries through the Web UI interface and receive responses from the LLM.</li>
+<li><strong>Document Management for Enhanced Retrieval:</strong> Allow users to upload documents to AnalyticDB for PostgreSQL for retrieval augmentation.</li>
+<li><strong>Service Modification Access:</strong> Authorized individuals can manage and modify the service via ECS.</li>
+</ul>
+<h2 id="additional-resources">Additional Resources</h2>
+<p>Explore more about setting up and managing your Multimodal Smart GenAI Assistant Service by referring to:</p>
+<ul>
+<li><a href="https://www.alibabacloud.com/">Compute Nest Documentation</a></li>
+<li><a href="https://www.alibabacloud.com/">Alibaba Cloud PAI-EAS User Guide</a></li>
+<li><a href="https://www.alibabacloud.com/">AnalyticDB for PostgreSQL Resources</a></li>
+</ul>
+        
+      </div>
+
+      <div class="copyrights">© 2009-2022 Aliyun.com 版权所有</div>
+    </div>
+  </div>
+  
+  <!--
+  MkDocs version      : 1.6.0
+  Docs Build Date UTC : 2024-05-01 09:25:54.862263+00:00
+  -->
+</body>
+</html>
